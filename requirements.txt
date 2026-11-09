@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 absl-py==2.5.1
 Box2D==2.3.10
 cloudpickle==3.1.2

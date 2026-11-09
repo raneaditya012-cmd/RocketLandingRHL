@@ -8,7 +8,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from wrappers import HoverBonusWrapper, ShapedRewardWrapper, landing_potential
 
 GAMMA = 0.999
-model = PPO.load("runs/baseline_seed0/model.zip", device="cpu")  # to get gentle, near-ground states
+model = PPO.load("models/baseline_seed0.zip", device="cpu")  # to get gentle, near-ground states
 
 
 def policy_random(obs, env):

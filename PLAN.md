@@ -1,6 +1,6 @@
 # PLAN: PPO on LunarLander-v3
 
-> Status: **DRAFT, awaiting approval.** No code written, nothing installed.
+> Status: **COMPLETE** (all stages built; see section 8 for deviations and README.md for results).
 
 ## 1. Goal and definition of "done"
 

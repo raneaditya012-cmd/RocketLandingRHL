@@ -21,6 +21,8 @@ from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.logger import configure
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 
+from wrappers import HoverBonusWrapper, ShapedRewardWrapper
+
 ENV_ID = "LunarLander-v3"
 
 # Hyperparameters: commonly used values for this environment (not tuned by us).
@@ -46,16 +48,28 @@ def main():
                     help="subproc = one process per env; dummy = all envs in one process")
     ap.add_argument("--torch-threads", type=int, default=2)
     ap.add_argument("--no-eval", action="store_true", help="skip periodic evaluation (speed tests)")
+    ap.add_argument("--shaped", choices=["none", "potential", "hover"], default="none",
+                    help="none = original reward; potential = soft-landing shaping; "
+                         "hover = negative control (flat per-step bonus)")
     args = ap.parse_args()
 
-    run_name = args.run_name or f"baseline_seed{args.seed}"
+    prefix = {"none": "baseline", "potential": "shaped", "hover": "hover"}[args.shaped]
+    run_name = args.run_name or f"{prefix}_seed{args.seed}"
     run_dir = os.path.join("runs", run_name)
     os.makedirs(run_dir, exist_ok=True)
     torch.set_num_threads(args.torch_threads)
 
     vec_cls = SubprocVecEnv if args.vec == "subproc" else DummyVecEnv
     # make_vec_env wraps every env in a Monitor, which records episode reward/length for logging.
-    env = make_vec_env(ENV_ID, n_envs=args.n_envs, seed=args.seed, vec_env_cls=vec_cls)
+    # Monitor sits INSIDE the reward wrapper (checked in check_wrappers.py), so ep_rew_mean in the
+    # logs is always the ORIGINAL reward, even for shaped runs.
+    wrapper_class, wrapper_kwargs = None, None
+    if args.shaped == "potential":
+        wrapper_class, wrapper_kwargs = ShapedRewardWrapper, {"gamma": HPARAMS["gamma"]}
+    elif args.shaped == "hover":
+        wrapper_class, wrapper_kwargs = HoverBonusWrapper, {"bonus": 0.5}
+    env = make_vec_env(ENV_ID, n_envs=args.n_envs, seed=args.seed, vec_env_cls=vec_cls,
+                       wrapper_class=wrapper_class, wrapper_kwargs=wrapper_kwargs)
 
     model = PPO("MlpPolicy", env, seed=args.seed, device="cpu", verbose=1, **HPARAMS)
     model.set_logger(configure(run_dir, ["stdout", "csv", "tensorboard"]))

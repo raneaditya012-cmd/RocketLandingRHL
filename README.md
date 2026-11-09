@@ -75,7 +75,7 @@ Both baseline and shaped spend a long stretch (roughly 300k-600k steps) with epi
 Tested on Ubuntu 22.04 (WSL2), Python 3.10. Box2D is built from source, so install a compiler and Python headers first (`sudo apt install build-essential python3-dev`), and install `swig` **before** the rest:
 
 ```bash
-git clone <this repo> && cd lunar-lander-ppo
+git clone https://github.com/raneaditya012-cmd/RocketLandingRHL.git && cd RocketLandingRHL
 python3 -m venv .venv && source .venv/bin/activate   # or: pip install virtualenv && virtualenv .venv
 pip install swig
 pip install -r requirements.txt                        # CPU-only PyTorch via the extra index in the file

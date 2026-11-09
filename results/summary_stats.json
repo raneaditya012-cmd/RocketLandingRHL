@@ -1,0 +1,42 @@
+{
+ "eval_mean_reward": {
+  "baseline_mean": 255.75100129808635,
+  "baseline_sd": 6.238602609337266,
+  "shaped_mean": 264.4944440003079,
+  "shaped_sd": 6.814262396883577,
+  "diff_shaped_minus_baseline": 8.743442702221557,
+  "welch_t": 2.1161901089809034,
+  "perm_p_two_sided": 0.07142857142857142,
+  "boot95_low": 1.4239765528117647,
+  "boot95_high": 16.03451269483591,
+  "n_baseline": 5,
+  "n_shaped": 5
+ },
+ "mean_steps": {
+  "baseline_mean": 344.018,
+  "baseline_sd": 26.734364028343755,
+  "shaped_mean": 305.45,
+  "shaped_sd": 33.30816566549411,
+  "diff_shaped_minus_baseline": -38.567999999999984,
+  "welch_t": -2.019206065728432,
+  "perm_p_two_sided": 0.07936507936507936,
+  "boot95_low": -72.28214999999993,
+  "boot95_high": -6.40784999999996,
+  "n_baseline": 5,
+  "n_shaped": 5
+ },
+ "steps_to_200": {
+  "baseline_mean": 768409.6,
+  "baseline_sd": 124156.78016443564,
+  "shaped_mean": 661913.6,
+  "shaped_sd": 89626.62004560922,
+  "diff_shaped_minus_baseline": -106496.0,
+  "welch_t": -1.555130733097211,
+  "perm_p_two_sided": 0.15873015873015872,
+  "boot95_low": -217907.20000000007,
+  "boot95_high": 21299.20000000007,
+  "n_baseline": 5,
+  "n_shaped": 5
+ },
+ "note": "Exact two-sided permutation tests, 3 metrics, no multiple-comparison correction; n=5 seeds per condition. Treat as exploratory."
+}

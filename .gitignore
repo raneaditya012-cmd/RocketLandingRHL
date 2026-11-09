@@ -2,5 +2,4 @@
 __pycache__/
 *.pyc
 runs/
-results/*.gif
 .ipynb_checkpoints/

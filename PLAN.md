@@ -132,3 +132,4 @@ Already decided: **no extra algorithm comparison for now.**
 ## 8. Deviation log
 
 - **Stage 0 (2026-11-09):** Windows Smart App Control blocked the unsigned Box2D binary, so the project runs in **WSL2 (Ubuntu-22.04, Python 3.10, plain virtualenv)** at `~/lunar-lander-ppo`, not conda/Python 3.11. Windows security settings were not changed. Installed: gymnasium 1.4.0, SB3 2.9.2, torch 2.14.1 (CPU). WSL has ~3.5 GB RAM, so keep `n_envs` around 8.
+- **Live viewing (2026-11-09):** WSLg opened windows but never drew them (cause not found; a WSL restart was not tried). Real-time viewing uses `live_view.py`, a browser MJPEG stream at `http://localhost:8000`. It will also play trained models in Stage 4 (`--model`).
